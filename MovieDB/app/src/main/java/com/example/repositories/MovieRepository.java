@@ -7,6 +7,7 @@ import com.example.model.Credits;
 import com.example.model.Movies;
 import com.example.model.NowPlaying;
 import com.example.model.Popular;
+import com.example.model.Reviews;
 import com.example.model.TopRated;
 import com.example.model.UpComing;
 import com.example.retrofit.ApiService;
@@ -132,6 +133,25 @@ public class MovieRepository {
 
             @Override
             public void onFailure(Call<Credits> call, Throwable t) {
+
+            }
+
+        });
+
+        return result;
+    }
+
+    public MutableLiveData<Reviews> getReviewsData(String movieId) {
+        final MutableLiveData<Reviews> result = new MutableLiveData<>();
+
+        ApiService.endPoint().getReviews(movieId, Const.API_KEY).enqueue(new Callback<Reviews>() {
+            @Override
+            public void onResponse(Call<Reviews> call, Response<Reviews> response) {
+                result.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Reviews> call, Throwable t) {
 
             }
 

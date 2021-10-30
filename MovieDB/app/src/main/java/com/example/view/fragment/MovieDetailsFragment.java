@@ -22,9 +22,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.adapter.CreditsAdapter;
+import com.example.adapter.ReviewsAdapter;
 import com.example.helper.Const;
 import com.example.model.Credits;
 import com.example.model.Movies;
+import com.example.model.Reviews;
 import com.example.moviedb.R;
 import com.example.viewmodel.MovieViewModel;
 
@@ -80,7 +82,7 @@ public class MovieDetailsFragment extends Fragment {
     private MovieViewModel viewModel;
     private RatingBar ratingBar;
     private LinearLayout details_layout_logo, details_layout_genre;
-    private RecyclerView rv_cast;
+    private RecyclerView rv_cast, rv_reviews;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,6 +102,7 @@ public class MovieDetailsFragment extends Fragment {
         details_img_backk = view.findViewById(R.id.details_img_backk);
         ratingBar = view.findViewById(R.id.ratingBar);
         rv_cast = view.findViewById(R.id.rv_cast);
+        rv_reviews = view.findViewById(R.id.rv_reviews);
         details_layout_logo = view.findViewById(R.id.details_layout_logo);
         details_layout_genre = view.findViewById(R.id.details_layout_genre);
 
@@ -113,6 +116,9 @@ public class MovieDetailsFragment extends Fragment {
 
         viewModel.getCredits(movieId);
         viewModel.getResultGetCredits().observe(getActivity(), showResultCredits);
+
+        viewModel.getReviews(movieId);
+        viewModel.getResultGetReviews().observe(getActivity(), showResultReviews);
 
         details_img_backk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,6 +220,17 @@ public class MovieDetailsFragment extends Fragment {
             CreditsAdapter adapter = new CreditsAdapter(getActivity());
             adapter.setCreditsList(credits.getCast());
             rv_cast.setAdapter(adapter);
+        }
+    };
+
+    private Observer<Reviews> showResultReviews = new Observer<Reviews>() {
+        @Override
+        public void onChanged(Reviews reviews) {
+            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 1, RecyclerView.VERTICAL, false);
+            rv_reviews.setLayoutManager(layoutManager);
+            ReviewsAdapter adapter = new ReviewsAdapter(getActivity());
+            adapter.setReviewsList(reviews.getResults());
+            rv_reviews.setAdapter(adapter);
         }
     };
 }

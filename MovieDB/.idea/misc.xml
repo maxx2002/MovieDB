@@ -19,8 +19,11 @@
         <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/drawable/ic_baseline_access_time_24.xml" value="0.13177083333333334" />
         <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/drawable/ic_baseline_how_to_vote_24.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/drawable/ic_baseline_local_movies_24.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/drawable/ic_baseline_movie_24.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/drawable/ic_baseline_star_24.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/drawable/ic_baseline_stars_24.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/drawable/ic_baseline_thumb_up_24.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/drawable/ic_baseline_videocam_24.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.13177083333333334" />
         <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/drawable/ic_now_playing_24.xml" value="0.2703125" />
@@ -32,8 +35,9 @@
         <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/layout/activity_now_playing.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/layout/card_cast.xml" value="0.4" />
         <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/layout/card_now_playing.xml" value="0.23802083333333332" />
+        <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/layout/card_reviews.xml" value="0.4" />
         <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/layout/fragment_main_menu.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/layout/fragment_movie_details.xml" value="0.4" />
+        <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/layout/fragment_movie_details.xml" value="0.3817878028404344" />
         <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/layout/fragment_now_playing.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/layout/fragment_popular.xml" value="0.264" />
         <entry key="..\:/Users/maxim/Documents/Semester3/MobileApps/github/MovieDB/MovieDB/app/src/main/res/layout/fragment_top_rated.xml" value="0.23802083333333332" />

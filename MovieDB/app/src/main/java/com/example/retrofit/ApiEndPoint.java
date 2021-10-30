@@ -4,6 +4,7 @@ import com.example.model.Credits;
 import com.example.model.Movies;
 import com.example.model.NowPlaying;
 import com.example.model.Popular;
+import com.example.model.Reviews;
 import com.example.model.TopRated;
 import com.example.model.UpComing;
 
@@ -46,4 +47,9 @@ public interface ApiEndPoint {
             @Query("api_key") String apiKey
     );
 
+    @GET("movie/{movie_id}/reviews")
+    Call<Reviews> getReviews(
+            @Path("movie_id") String movieId,
+            @Query("api_key") String apiKey
+    );
 }

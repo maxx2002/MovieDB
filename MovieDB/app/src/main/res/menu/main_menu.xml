@@ -11,7 +11,7 @@
         android:title="Up Coming" />
     <item
         android:id="@+id/popularFragment"
-        android:icon="@drawable/ic_baseline_star_24"
+        android:icon="@drawable/ic_baseline_stars_24"
         android:title="Popular" />
     <item
         android:id="@+id/topRatedFragment"

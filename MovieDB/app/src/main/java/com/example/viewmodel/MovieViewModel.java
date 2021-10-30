@@ -12,6 +12,7 @@ import com.example.model.Credits;
 import com.example.model.Movies;
 import com.example.model.NowPlaying;
 import com.example.model.Popular;
+import com.example.model.Reviews;
 import com.example.model.TopRated;
 import com.example.model.UpComing;
 import com.example.repositories.MovieRepository;
@@ -77,5 +78,14 @@ public class MovieViewModel extends AndroidViewModel {
     }
     public LiveData<Credits> getResultGetCredits() {
         return resultGetCredits;
+    }
+
+    // view model get cast
+    private MutableLiveData<Reviews> resultGetReviews = new MutableLiveData<>();
+    public void getReviews(String movieId) {
+        resultGetReviews = repository.getReviewsData(movieId);
+    }
+    public LiveData<Reviews> getResultGetReviews() {
+        return resultGetReviews;
     }
 }
