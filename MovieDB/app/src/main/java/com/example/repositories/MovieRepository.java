@@ -3,6 +3,7 @@ package com.example.repositories;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.helper.Const;
+import com.example.model.Credits;
 import com.example.model.Movies;
 import com.example.model.NowPlaying;
 import com.example.model.Popular;
@@ -112,6 +113,25 @@ public class MovieRepository {
 
             @Override
             public void onFailure(Call<TopRated> call, Throwable t) {
+
+            }
+
+        });
+
+        return result;
+    }
+
+    public MutableLiveData<Credits> getCreditsData(String movieId) {
+        final MutableLiveData<Credits> result = new MutableLiveData<>();
+
+        ApiService.endPoint().getCredits(movieId, Const.API_KEY).enqueue(new Callback<Credits>() {
+            @Override
+            public void onResponse(Call<Credits> call, Response<Credits> response) {
+                result.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Credits> call, Throwable t) {
 
             }
 

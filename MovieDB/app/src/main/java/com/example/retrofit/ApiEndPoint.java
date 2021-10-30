@@ -1,5 +1,6 @@
 package com.example.retrofit;
 
+import com.example.model.Credits;
 import com.example.model.Movies;
 import com.example.model.NowPlaying;
 import com.example.model.Popular;
@@ -38,4 +39,11 @@ public interface ApiEndPoint {
     Call<TopRated> getTopRated(
             @Query("api_key") String apiKey
     );
+
+    @GET("movie/{movie_id}/credits")
+    Call<Credits> getCredits(
+            @Path("movie_id") String movieId,
+            @Query("api_key") String apiKey
+    );
+
 }

@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.adapter.CreditsAdapter;
 import com.example.helper.Const;
+import com.example.model.Credits;
 import com.example.model.Movies;
 import com.example.moviedb.R;
 import com.example.viewmodel.MovieViewModel;
@@ -76,6 +80,7 @@ public class MovieDetailsFragment extends Fragment {
     private MovieViewModel viewModel;
     private RatingBar ratingBar;
     private LinearLayout details_layout_logo, details_layout_genre;
+    private RecyclerView rv_cast;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,6 +99,7 @@ public class MovieDetailsFragment extends Fragment {
         details_img_backdrop = view.findViewById(R.id.details_img_backdrop);
         details_img_backk = view.findViewById(R.id.details_img_backk);
         ratingBar = view.findViewById(R.id.ratingBar);
+        rv_cast = view.findViewById(R.id.rv_cast);
         details_layout_logo = view.findViewById(R.id.details_layout_logo);
         details_layout_genre = view.findViewById(R.id.details_layout_genre);
 
@@ -101,8 +107,12 @@ public class MovieDetailsFragment extends Fragment {
         String from = getArguments().getString("from").toString();
 
         viewModel = new ViewModelProvider(MovieDetailsFragment.this).get(MovieViewModel.class);
+
         viewModel.getMovieById(movieId);
-        viewModel.getResultGetMovieById().observe(getViewLifecycleOwner(), showResultMovie);
+        viewModel.getResultGetMovieById().observe(getActivity(), showResultMovie);
+
+        viewModel.getCredits(movieId);
+        viewModel.getResultGetCredits().observe(getActivity(), showResultCredits);
 
         details_img_backk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,7 +189,7 @@ public class MovieDetailsFragment extends Fragment {
                     Glide.with(getActivity()).load(ProductionLogo).into(img);
                 }
 
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(270, 270);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(220, 220);
                 params.setMargins(20,0,20,0);
                 img.setLayoutParams(params);
                 details_layout_logo.addView(img);
@@ -193,6 +203,17 @@ public class MovieDetailsFragment extends Fragment {
                     }
                 });
             }
+        }
+    };
+
+    private Observer<Credits> showResultCredits = new Observer<Credits>() {
+        @Override
+        public void onChanged(Credits credits) {
+            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 1, RecyclerView.HORIZONTAL, false);
+            rv_cast.setLayoutManager(layoutManager);
+            CreditsAdapter adapter = new CreditsAdapter(getActivity());
+            adapter.setCreditsList(credits.getCast());
+            rv_cast.setAdapter(adapter);
         }
     };
 }

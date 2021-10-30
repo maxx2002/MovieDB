@@ -8,6 +8,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.model.Credits;
 import com.example.model.Movies;
 import com.example.model.NowPlaying;
 import com.example.model.Popular;
@@ -67,5 +68,14 @@ public class MovieViewModel extends AndroidViewModel {
     }
     public LiveData<TopRated> getResultGetTopRated() {
         return resultGetTopRated;
+    }
+
+    // view model get cast
+    private MutableLiveData<Credits> resultGetCredits = new MutableLiveData<>();
+    public void getCredits(String movieId) {
+        resultGetCredits = repository.getCreditsData(movieId);
+    }
+    public LiveData<Credits> getResultGetCredits() {
+        return resultGetCredits;
     }
 }

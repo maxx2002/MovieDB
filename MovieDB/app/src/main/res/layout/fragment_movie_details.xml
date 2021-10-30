@@ -247,7 +247,7 @@
                 android:text="TextView"
                 android:textAlignment="center"
                 android:textColor="@color/blue100"
-                android:textSize="24sp"
+                android:textSize="28sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -287,7 +287,7 @@
                 android:layout_marginEnd="24dp"
                 android:text="TextView"
                 android:textColor="@color/blue100"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/details_text_tagline" />
@@ -302,7 +302,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/details_text_overview" />
+                app:layout_constraintTop_toBottomOf="@+id/rv_cast" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
@@ -334,10 +334,8 @@
                 android:layout_height="100dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="24dp"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3">
 
@@ -358,6 +356,27 @@
                 app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
                 app:layout_constraintStart_toEndOf="@+id/ratingBar"
                 app:layout_constraintTop_toTopOf="@+id/ratingBar" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="Cast"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/details_text_overview" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_cast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView11" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
