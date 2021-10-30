@@ -5,6 +5,9 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.helper.Const;
 import com.example.model.Movies;
 import com.example.model.NowPlaying;
+import com.example.model.Popular;
+import com.example.model.TopRated;
+import com.example.model.UpComing;
 import com.example.retrofit.ApiService;
 
 import retrofit2.Call;
@@ -55,6 +58,63 @@ public class MovieRepository {
             public void onFailure(Call<NowPlaying> call, Throwable t) {
 
             }
+        });
+
+        return result;
+    }
+
+    public MutableLiveData<UpComing> getUpComingData() {
+        final MutableLiveData<UpComing> result = new MutableLiveData<>();
+
+        ApiService.endPoint().getUpComing(Const.API_KEY).enqueue(new Callback<UpComing>() {
+            @Override
+            public void onResponse(Call<UpComing> call, Response<UpComing> response) {
+                result.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<UpComing> call, Throwable t) {
+
+            }
+
+        });
+
+        return result;
+    }
+
+    public MutableLiveData<Popular> getPopularData() {
+        final MutableLiveData<Popular> result = new MutableLiveData<>();
+
+        ApiService.endPoint().getPopular(Const.API_KEY).enqueue(new Callback<Popular>() {
+            @Override
+            public void onResponse(Call<Popular> call, Response<Popular> response) {
+                result.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Popular> call, Throwable t) {
+
+            }
+
+        });
+
+        return result;
+    }
+
+    public MutableLiveData<TopRated> getTopRatedData() {
+        final MutableLiveData<TopRated> result = new MutableLiveData<>();
+
+        ApiService.endPoint().getTopRated(Const.API_KEY).enqueue(new Callback<TopRated>() {
+            @Override
+            public void onResponse(Call<TopRated> call, Response<TopRated> response) {
+                result.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<TopRated> call, Throwable t) {
+
+            }
+
         });
 
         return result;

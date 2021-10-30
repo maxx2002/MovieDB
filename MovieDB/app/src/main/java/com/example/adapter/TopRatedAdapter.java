@@ -1,8 +1,6 @@
 package com.example.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.media.Rating;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,34 +17,34 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.helper.Const;
 import com.example.model.NowPlaying;
+import com.example.model.TopRated;
 import com.example.moviedb.R;
-import com.example.view.activities.MovieDetailsActivity;
 
 import java.util.List;
 
-public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.CardViewViewHolder> {
+public class TopRatedAdapter extends RecyclerView.Adapter<TopRatedAdapter.CardViewViewHolder> {
 
     private Context context;
-    private List<NowPlaying.Results> listNowPlaying;
+    private List<TopRated.Results> listTopRated;
 
-    private List<NowPlaying.Results> getListNowPlaying() {return listNowPlaying;}
-    public void setListNowPlaying(List<NowPlaying.Results> listNowPlaying) {
-        this.listNowPlaying = listNowPlaying;
+    private List<TopRated.Results> getListTopRated() {return listTopRated;}
+    public void setListTopRated(List<TopRated.Results> listTopRated) {
+        this.listTopRated = listTopRated;
     }
-    public NowPlayingAdapter(Context context) {
+    public TopRatedAdapter(Context context) {
         this.context = context;
     }
 
     @NonNull
     @Override
-    public CardViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TopRatedAdapter.CardViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_now_playing, parent, false);
-        return new NowPlayingAdapter.CardViewViewHolder(view);
+        return new TopRatedAdapter.CardViewViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CardViewViewHolder holder, int position) {
-        final NowPlaying.Results results = getListNowPlaying().get(position);
+    public void onBindViewHolder(@NonNull TopRatedAdapter.CardViewViewHolder holder, int position) {
+        final TopRated.Results results = getListTopRated().get(position);
         holder.lbl_title.setText(results.getTitle());
         holder.card_ratingbar.setRating((float) results.getVote_average());
         Glide.with(context).load(Const.IMG_URL + results.getPoster_path()).into(holder.img_poster);
@@ -56,15 +54,15 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.Ca
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putString("movieId", ""+results.getId());
-                bundle.putString("from", "nowplaying");
-                Navigation.findNavController(view).navigate(R.id.action_nowPlayingFragment_to_MovieDetailFragment, bundle);
+                bundle.putString("from", "toprated");
+                Navigation.findNavController(view).navigate(R.id.action_topRatedFragment2_to_MovieDetailFragment, bundle);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return getListNowPlaying().size();
+        return getListTopRated().size();
     }
 
     public class CardViewViewHolder extends RecyclerView.ViewHolder {

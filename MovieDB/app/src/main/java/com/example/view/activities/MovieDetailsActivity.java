@@ -1,10 +1,9 @@
-package com.example.view;
+package com.example.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -33,9 +32,9 @@ public class MovieDetailsActivity extends AppCompatActivity {
         details_text_date = findViewById(R.id.details_text_date);
         details_text_subtitle = findViewById(R.id.details_text_subtitle);
         details_text_genre = findViewById(R.id.details_text_genre);
-        details_text_runtime = findViewById(R.id.details_text_runtime);
+        details_text_runtime = findViewById(R.id.details_text_duration);
         details_img_poster = findViewById(R.id.details_img_poster);
-        details_img_back = findViewById(R.id.details_img_back);
+        details_img_back = findViewById(R.id.details_img_backto);
 
         Intent intent = getIntent();
         movie_id = intent.getStringExtra("movie_id");
