@@ -1,6 +1,7 @@
 package com.example.view.fragment;
 
 import android.app.ActionBar;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -75,6 +76,9 @@ public class MovieDetailsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        dialog = ProgressDialog.show(getActivity(), "", "Loading...", true);
+        dialog.show();
+
     }
 
     private TextView details_text_duration, details_text_releasedate, details_text_popularity, details_text_title, details_text_overview, details_text_tagline, details_text_votecount, details_text_voteavg;
@@ -83,6 +87,7 @@ public class MovieDetailsFragment extends Fragment {
     private RatingBar ratingBar;
     private LinearLayout details_layout_logo, details_layout_genre;
     private RecyclerView rv_cast, rv_reviews;
+    private ProgressDialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -231,6 +236,7 @@ public class MovieDetailsFragment extends Fragment {
             ReviewsAdapter adapter = new ReviewsAdapter(getActivity());
             adapter.setReviewsList(reviews.getResults());
             rv_reviews.setAdapter(adapter);
+            dialog.dismiss();
         }
     };
 }

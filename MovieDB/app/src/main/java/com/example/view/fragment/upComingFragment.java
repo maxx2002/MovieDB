@@ -1,5 +1,6 @@
 package com.example.view.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -66,10 +67,14 @@ public class upComingFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        dialog = ProgressDialog.show(getActivity(), "", "Loading...", true);
+        dialog.show();
     }
 
     private RecyclerView rv_up_coming;
     private MovieViewModel view_model;
+    private ProgressDialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,6 +98,7 @@ public class upComingFragment extends Fragment {
             UpComingAdapter adapter = new UpComingAdapter(getActivity());
             adapter.setListUpComing(upComing.getResults());
             rv_up_coming.setAdapter(adapter);
+            dialog.dismiss();
 
             ItemClickSupport.addTo(rv_up_coming).setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
                 @Override

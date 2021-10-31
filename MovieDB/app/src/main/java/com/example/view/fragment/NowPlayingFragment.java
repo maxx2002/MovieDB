@@ -1,5 +1,6 @@
 package com.example.view.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,9 +10,12 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.example.adapter.NowPlayingAdapter;
 import com.example.model.NowPlaying;
@@ -64,10 +68,14 @@ public class NowPlayingFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        dialog = ProgressDialog.show(getActivity(), "", "Loading...", true);
+        dialog.show();
     }
 
     private RecyclerView rv_now_playing;
     private MovieViewModel view_model;
+    private ProgressDialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,6 +100,7 @@ public class NowPlayingFragment extends Fragment {
             NowPlayingAdapter adapter = new NowPlayingAdapter(getActivity());
             adapter.setListNowPlaying(nowPlaying.getResults());
             rv_now_playing.setAdapter(adapter);
+            dialog.dismiss();
 
             ItemClickSupport.addTo(rv_now_playing).setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
                 @Override

@@ -22,6 +22,7 @@ import com.example.model.NowPlaying;
 import com.example.moviedb.R;
 import com.example.view.activities.MovieDetailsActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.CardViewViewHolder> {
@@ -82,4 +83,5 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.Ca
             cv = itemView.findViewById(R.id.cv_card_nowplaying);
         }
     }
+
 }
