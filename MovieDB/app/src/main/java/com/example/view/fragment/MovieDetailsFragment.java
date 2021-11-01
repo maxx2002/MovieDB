@@ -157,9 +157,9 @@ public class MovieDetailsFragment extends Fragment {
             String votenumber = String.valueOf(movies.getVote_average());
             double voteavg = movies.getVote_average();
 
-            String poster_path = Const.IMG_URL + movies.getPoster_path().toString();
+            String poster_path = ""+Const.IMG_URL + movies.getPoster_path().toString();
             Glide.with(MovieDetailsFragment.this).load(poster_path).into(details_img_posters);
-            String backdrop_path = Const.IMG_URL + movies.getBackdrop_path().toString();
+            String backdrop_path = ""+Const.IMG_URL + movies.getBackdrop_path().toString();
             Glide.with(MovieDetailsFragment.this).load(backdrop_path).into(details_img_backdrop);
 
             details_text_title.setText(title);

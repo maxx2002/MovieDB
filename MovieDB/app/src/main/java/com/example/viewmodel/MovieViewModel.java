@@ -35,10 +35,10 @@ public class MovieViewModel extends AndroidViewModel {
         return resultGetMovieById;
     }
 
-    // view model get nowplaying
+    // view model get now playing
     private MutableLiveData<NowPlaying> resultGetNowPlaying = new MutableLiveData<>();
-    public void getNowPlaying() {
-        resultGetNowPlaying = repository.getNowPlayingData();
+    public void getNowPlaying(Integer page) {
+        resultGetNowPlaying = repository.getNowPlayingData(page);
     }
     public LiveData<NowPlaying> getResultGetNowPlaying() {
         return resultGetNowPlaying;
@@ -46,8 +46,8 @@ public class MovieViewModel extends AndroidViewModel {
 
     // view model get upcoming
     private MutableLiveData<UpComing> resultGetUpComing = new MutableLiveData<>();
-    public void getUpComing() {
-        resultGetUpComing = repository.getUpComingData();
+    public void getUpComing(Integer page) {
+        resultGetUpComing = repository.getUpComingData(page);
     }
     public LiveData<UpComing> getResultGetUpComing() {
         return resultGetUpComing;
@@ -55,8 +55,8 @@ public class MovieViewModel extends AndroidViewModel {
 
     // view model get popular
     private MutableLiveData<Popular> resultGetPopular = new MutableLiveData<>();
-    public void getPopular() {
-        resultGetPopular = repository.getPopularData();
+    public void getPopular(Integer page) {
+        resultGetPopular = repository.getPopularData(page);
     }
     public LiveData<Popular> getResultGetPopular() {
         return resultGetPopular;
@@ -64,8 +64,8 @@ public class MovieViewModel extends AndroidViewModel {
 
     // view model get top rated
     private MutableLiveData<TopRated> resultGetTopRated = new MutableLiveData<>();
-    public void getTopRated() {
-        resultGetTopRated = repository.getTopRatedData();
+    public void getTopRated(Integer page) {
+        resultGetTopRated = repository.getTopRatedData(page);
     }
     public LiveData<TopRated> getResultGetTopRated() {
         return resultGetTopRated;

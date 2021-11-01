@@ -23,22 +23,26 @@ public interface ApiEndPoint {
 
     @GET("movie/now_playing")
     Call<NowPlaying> getNowPlaying(
-            @Query("api_key") String apiKey
+            @Query("api_key") String apiKey,
+            @Query("page") Integer page
     );
 
     @GET("movie/upcoming")
     Call<UpComing> getUpComing(
-            @Query("api_key") String apiKey
+            @Query("api_key") String apiKey,
+            @Query("page") Integer page
     );
 
     @GET("movie/popular")
     Call<Popular> getPopular(
-            @Query("api_key") String apiKey
+            @Query("api_key") String apiKey,
+            @Query("page") Integer page
     );
 
     @GET("movie/top_rated")
     Call<TopRated> getTopRated(
-            @Query("api_key") String apiKey
+            @Query("api_key") String apiKey,
+            @Query("page") Integer page
     );
 
     @GET("movie/{movie_id}/credits")

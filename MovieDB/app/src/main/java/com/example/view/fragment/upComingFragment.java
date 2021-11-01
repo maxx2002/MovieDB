@@ -3,16 +3,19 @@ package com.example.view.fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.adapter.NowPlayingAdapter;
 import com.example.adapter.UpComingAdapter;
@@ -21,6 +24,9 @@ import com.example.model.NowPlaying;
 import com.example.model.UpComing;
 import com.example.moviedb.R;
 import com.example.viewmodel.MovieViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -76,6 +82,11 @@ public class upComingFragment extends Fragment {
     private MovieViewModel view_model;
     private ProgressDialog dialog;
 
+    private UpComingAdapter adapter;
+    private Integer page = 1;
+    private Boolean load = false;
+    private List<UpComing.Results> list = new ArrayList<>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -84,7 +95,10 @@ public class upComingFragment extends Fragment {
 
         rv_up_coming = view.findViewById(R.id.rv_up_coming_fragment);
         view_model = new ViewModelProvider(getActivity()).get(MovieViewModel.class);
-        view_model.getUpComing();
+
+        adapter = new UpComingAdapter(getActivity());
+
+        view_model.getUpComing(page);
         view_model.getResultGetUpComing().observe(getActivity(), showUpComing);
 
         return view;
@@ -94,11 +108,42 @@ public class upComingFragment extends Fragment {
         @Override
         public void onChanged(UpComing upComing) {
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 1, RecyclerView.HORIZONTAL, false);
-            rv_up_coming.setLayoutManager(layoutManager);
-            UpComingAdapter adapter = new UpComingAdapter(getActivity());
-            adapter.setListUpComing(upComing.getResults());
-            rv_up_coming.setAdapter(adapter);
+
+            if (page == 1) {
+                rv_up_coming.setLayoutManager(layoutManager);
+                adapter.setListUpComing(upComing.getResults());
+                list.addAll(upComing.getResults());
+                rv_up_coming.setAdapter(adapter);
+            } else {
+                list.add(null);
+                adapter.setListUpComing(list);
+                adapter.notifyItemInserted(list.size() -1);
+                list.remove(list.size() -1);
+                list.addAll(upComing.getResults());
+                load = false;
+            }
+
             dialog.dismiss();
+
+            rv_up_coming.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+
+                    LinearLayoutManager linearLayoutManager = (LinearLayoutManager) rv_up_coming.getLayoutManager();
+
+                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == list.size() -2) {
+                        page++;
+                        load = true;
+
+                        if (page > 1) {
+                            view_model.getUpComing(page);
+                            view_model.getResultGetUpComing().observe(getActivity(), showUpComing);
+                        }
+                    }
+                }
+
+            });
 
             ItemClickSupport.addTo(rv_up_coming).setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
                 @Override

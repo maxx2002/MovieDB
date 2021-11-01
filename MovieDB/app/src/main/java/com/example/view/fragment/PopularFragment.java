@@ -3,11 +3,13 @@ package com.example.view.fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -15,10 +17,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.adapter.PopularAdapter;
+import com.example.adapter.UpComingAdapter;
 import com.example.helper.ItemClickSupport;
 import com.example.model.Popular;
+import com.example.model.UpComing;
 import com.example.moviedb.R;
 import com.example.viewmodel.MovieViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,6 +81,11 @@ public class PopularFragment extends Fragment {
     private MovieViewModel view_model;
     private ProgressDialog dialog;
 
+    private PopularAdapter adapter;
+    private Integer page = 1;
+    private Boolean load = false;
+    private List<Popular.Results> list = new ArrayList<>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -82,7 +94,10 @@ public class PopularFragment extends Fragment {
 
         rv_popular = view.findViewById(R.id.rv_popular_fragment);
         view_model = new ViewModelProvider(getActivity()).get(MovieViewModel.class);
-        view_model.getPopular();
+
+        adapter = new PopularAdapter(getActivity());
+
+        view_model.getPopular(page);
         view_model.getResultGetPopular().observe(getActivity(), showPopular);
 
         return view;
@@ -93,11 +108,42 @@ public class PopularFragment extends Fragment {
         @Override
         public void onChanged(Popular popular) {
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(), 1, RecyclerView.HORIZONTAL, false);
-            rv_popular.setLayoutManager(layoutManager);
-            PopularAdapter adapter = new PopularAdapter(getActivity());
-            adapter.setListPopular(popular.getResults());
-            rv_popular.setAdapter(adapter);
+
+            if (page == 1) {
+                rv_popular.setLayoutManager(layoutManager);
+                adapter.setListPopular(popular.getResults());
+                list.addAll(popular.getResults());
+                rv_popular.setAdapter(adapter);
+            } else {
+                list.add(null);
+                adapter.setListPopular(list);
+                adapter.notifyItemInserted(list.size() -1);
+                list.remove(list.size() -1);
+                list.addAll(popular.getResults());
+                load = false;
+            }
+
             dialog.dismiss();
+
+            rv_popular.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+
+                    LinearLayoutManager linearLayoutManager = (LinearLayoutManager) rv_popular.getLayoutManager();
+
+                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == list.size() -2) {
+                        page++;
+                        load = true;
+
+                        if (page > 1) {
+                            view_model.getPopular(page);
+                            view_model.getResultGetPopular().observe(getActivity(), showPopular);
+                        }
+                    }
+                }
+
+            });
 
             ItemClickSupport.addTo(rv_popular).setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
                 @Override
